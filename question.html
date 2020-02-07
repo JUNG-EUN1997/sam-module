@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/common.css">
+    <link rel="stylesheet" href="./static/css/main.css">
+    <title></title>
+  </head>
+  <body class="body-bg">
+    <div class="wrap">
+      <div class="wrap_w">
+        <div class="select_wrap">
+          <div class="select_trigger">
+            <span class="select_placeholder">Select a speaker</span>
+            <div class="ic_select"></div>
+          </div>
+          <div class="option_wrap">
+            <span class="option_cnt selected" data-value="나대한 교수">나대한 교수</span>
+            <span class="option_cnt" data-value="2 교수">2 교수</span>
+            <span class="option_cnt" data-value="3 교수">3 교수</span>
+          </div>
+        </div>
+        <button class="btn-submit btn_bot">질문내용보기</button>
+      </div>
+      <div class="pop_bg"></div>
+      <div class="pop_wrap">
+        <div class="pop_content">
+          <div class="pop_btn-x">
+            <span></span>
+          </div>
+          <h1 class="h1-pop_title">관리자 코드를 입력하세요.</h1>
+          <input type="text" class="pop_input" placeholder="CODE번호" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+          <a href="./question_list.html" rel="삭제예정"><button class="btn-submit btn-pop_submit">완료</button></a>
+        </div>
+      </div>
+    </div>
+    <script src="./static/lib/jquery-1.12.4.min.js"></script>
+    <script src="./static/js/main.js"></script>
+  </body>
+</html>
