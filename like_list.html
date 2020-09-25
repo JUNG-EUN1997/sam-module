@@ -4,45 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/common.css">
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="./static/css/main.css?v=2">
     <title></title>
   </head>
   <body class="body-bg">
-    <div class="wrap">
+    <div class="wrap" style="position:relative">
       <div class="wrap_w">
-        <div class="ab_cnt">
-          <table class="ab_table">
-            <tr>
-              <td>
-                <div class="img-ratio_wrap">
-                  <div class="img-ratio_h">
-                    <div class="img-ratio_cen">
-                      <img src="./static/images/img_human.png" alt="">
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="ab_title">
-                <h1 class="ab_title-h1">제 4차 산업혁명과 우리사회의 고령화 문제에 관한 고찰</h1>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td class="btn_alarm_wrap">
-                <span class="btn_alarm"></span>
-                <span class="txt_alarm">30min</span>
-              </td>
-              <td class="ab_info_wrap">
-                <h2 class="ab_name-h2">나대한교수</h2>
-                <p class="ab_info">대한국제대학교 생명공학연구실<br />
-                (홍길동, 김한국, 김사랑)<br />
-                RoomA <span class="ab_time">(09:00 ~ 10:00 )</span></p>
-              </td>
-              <td></td>
-            </tr>
-          </table>
-        </div>
-        <div class="ab_cnt">
+
+        <!-- <div class="ab_cnt">
           <table class="ab_table">
             <tr>
               <td>
@@ -73,29 +42,40 @@
               <td></td>
             </tr>
           </table>
-        </div>
+        </div> -->
       </div>
       <div class="pop_bg"></div>
-      <div class="pop_wrap">
-        <div class="pop_content">
+      <div class="pop_wrap not_vc">
+        <div class="pop_content alarm_pop_wrap">
           <div class="pop_btn-x">
             <span></span>
           </div>
           <h1 class="h1-pop_title">Alarm setting</h1>
           <div class="select_wrap pop_select_wrap">
             <div class="select_trigger">
-              <span class="select_placeholder">OFF</span>
+              <span class="select_placeholder">SELECT</span>
               <div class="ic_select"></div>
             </div>
             <div class="option_wrap">
-              <span class="option_cnt selected" data-value="30">30 mins</span>
-              <span class="option_cnt" data-value="15">15 mins</span>
+              <span class="option_cnt" data-value="-1">OFF</span>
               <span class="option_cnt" data-value="5">5 mins</span>
+              <span class="option_cnt" data-value="15">15 mins</span>
+              <span class="option_cnt" data-value="30">30 mins</span>
             </div>
           </div>
-          <button class="btn-submit">Done</button>
+          <button id="submitAlarm" class="btn-submit">Done</button>
+        </div>
+        <div class="pop_content alert_pop_wrap">
+          <div class="pop_btn-x">
+            <span></span>
+          </div>
+          <h1 class="h1-pop_title" id="alertTxt"></h1>
+          <button class="btn-submit btn-pop_submit" onclick="MainModule.hidePop()">Done</button>
         </div>
       </div>
     </div>
+    <script src="./static/lib/jquery-1.12.4.min.js"></script>
+    <script src="./static/js/main.js?v=1"></script>
+    <script src="./static/js/likeList.js?v=23"></script>
   </body>
 </html>

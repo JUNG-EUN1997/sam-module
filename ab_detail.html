@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/common.css">
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="./static/css/main.css?v=1">
     <title></title>
   </head>
-  <body class="body-bg">
+  <body class="body-bg" style="position:relative;">
     <div class="wrap">
       <div class="wrap_w">
         <div class="detail_wrap">
-          <div class="like_wrap">
+          <!-- <div class="like_wrap">
             <span class="btn_like active"></span>
           </div>
           <h1 class="detail_title">2020년 한국 경제 어디로 가야 하는지 전문가 패널을 모시고 들어보는 세션</h1>
@@ -55,9 +55,23 @@
             -Lost & Found, 24시 Call Center 등<br />
             -기타. 행사의 특성에 따라 Customizing이 가능<br />
             -주관기관/학회/기업 이름으로 된 어플 제작<br />
+          </div> -->
+        </div>
+        <a href="#" id="abstractHref" target="_blank"><button class="btn-submit mt-10">초록보기</button></a>
+      </div>
+      <div class="pop_bg"></div>
+      <div class="pop_wrap not_vc">
+        <div class="pop_content">
+          <div class="pop_btn-x">
+            <span></span>
           </div>
+          <h1 class="h1-pop_title"></h1>
+          <button class="btn-submit btn-pop_submit" onclick="MainModule.hidePop()">완료</button>
         </div>
       </div>
     </div>
+    <script src="./static/lib/jquery-1.12.4.min.js"></script>
+    <script src="./static/js/main.js?v=1"></script>
+    <script src="./static/js/abDetail.js?v=6"></script>
   </body>
 </html>

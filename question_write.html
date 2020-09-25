@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/common.css">
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="./static/css/main.css?v=2">
     <title></title>
   </head>
-  <body class="body-bg">
+  <body class="body-bg" style="position:relative;">
     <div class="wrap">
-      <div class="wrap_w">
+      <div class="wrap_w" style="margin-top:0;padding-top:10px;">
         <div class="select_wrap">
           <div class="select_trigger">
             <span class="select_placeholder">Select a speaker</span>
@@ -22,12 +22,23 @@
           </div>
         </div>
         <div class="question_write_wrap">
-          <textarea name="name" class="question_textarea" placeholder="질문을 입력해주세요."></textarea>
+          <textarea id="content" name="name" class="question_textarea" placeholder="질문을 입력해주세요."></textarea>
         </div>
-        <button class="btn-submit">Submit</button>
+        <button id="postQuestion" class="btn-submit">Submit</button>
+      </div>
+      <div class="pop_bg"></div>
+      <div class="pop_wrap not_vc">
+        <div class="pop_content">
+          <div class="pop_btn-x">
+            <span></span>
+          </div>
+          <h1 class="h1-pop_title"></h1>
+          <button class="btn-submit btn-pop_submit" onclick="MainModule.hidePop()">닫기</button>
+        </div>
       </div>
     </div>
     <script src="./static/lib/jquery-1.12.4.min.js"></script>
-    <script src="./static/js/main.js"></script>
+    <script src="./static/js/main.js?v=2"></script>
+    <script src="./static/js/question.js?v=4"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/common.css">
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="./static/css/main.css?v=1">
     <title></title>
   </head>
   <body class="body-bg">
@@ -21,7 +21,7 @@
             <span class="option_cnt" data-value="3 교수">3 교수</span>
           </div>
         </div>
-        <button class="btn-submit btn_bot">질문내용보기</button>
+        <button id="btnShowList" class="btn-submit btn_bot js-showPop">질문내용보기</button>
       </div>
       <div class="pop_bg"></div>
       <div class="pop_wrap">
@@ -30,12 +30,13 @@
             <span></span>
           </div>
           <h1 class="h1-pop_title">관리자 코드를 입력하세요.</h1>
-          <input type="text" class="pop_input" placeholder="CODE번호" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-          <a href="./question_list.html" rel="삭제예정"><button class="btn-submit btn-pop_submit">완료</button></a>
+          <input type="text" id="codeInput" class="pop_input" placeholder="CODE번호" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+          <button id="btnAdmin" class="btn-submit btn-pop_submit">완료</button>
         </div>
       </div>
     </div>
     <script src="./static/lib/jquery-1.12.4.min.js"></script>
-    <script src="./static/js/main.js"></script>
+    <script src="./static/js/main.js?v=2"></script>
+    <script src="./static/js/question.js?v=4"></script>
   </body>
 </html>
