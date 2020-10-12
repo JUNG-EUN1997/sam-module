@@ -25,8 +25,8 @@ a{text-decoration: none;}
 .wrap_w{width: 95%; margin:10px auto; margin-top: 0; padding-top: 10px;}
 .wrap_w.not-mt{margin-top: 0;padding-top: 10px;}
 .img-ratio_wrap{width: 100%;margin: auto;}
-.img-ratio_h{padding-top: 100%;position: relative;overflow: hidden;}
-.img-ratio_h img{position: absolute;top: 50%;left: 50%;max-width: 100%;height: auto;transform: translate(-50%, -50%);}
+.img-ratio_h{position: relative;overflow: hidden;}
+.img-ratio_h img{max-width: 100%;height: auto;}
 .btn_bot{position: absolute;width: 95%;bottom: 20px;max-width: 800px;}
 .vertical-middle{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
 /* slect 공통 */
