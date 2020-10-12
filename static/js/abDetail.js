@@ -61,7 +61,7 @@ var AbDetailModule = (function(){
       var is_favorite = (response.is_favorite=="1") ? ' active' : ''
       var detail_html = '<div class="like_wrap"><span class="btn_like'+is_favorite+'"></span></div>'
       detail_html += '<h1 class="detail_title">'+use_response_val[0]+'</h1>'
-      detail_html += '<table class="ab_table"><tr><td><div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
+      detail_html += '<table class="ab_table ab_table_detail"><tr><td><div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
       var this_img = (response.speaker_photo_1=='') ? './static/images/img_human.png' : response.speaker_photo_1
       detail_html += '<img src="'+this_img+'" alt="">'
       detail_html += '</div></div></div></td>'

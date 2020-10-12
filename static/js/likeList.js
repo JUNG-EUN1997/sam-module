@@ -10,20 +10,20 @@ var LikeListModule = (function(){
   var COLOR_CODE = ['x','메인색상','메인색상내부글자색상','RGB색상'];
   function init(){
     $root = $('.wrap');
-    // LANG_TYPE = MainModule.getLocalStorage()
-
     LANG_TYPE = MainModule.getSomeUrl('lang')
+    LANG_TYPE = (LANG_TYPE != null && LANG_TYPE != undefined && LANG_TYPE != '') ? LANG_TYPE : localStorage.getItem('lang')
     LANG_TYPE = (LANG_TYPE=='') ? 'ko' : LANG_TYPE;
+    //lang type 1순위 url parameter, 2순위 local storage
     MODULE_ID = MainModule.getSomeUrl('id')
     if (LANG_TYPE=='en') {
       ALERT_TXT_USE = ALERT_TXT_EN
     }else{
       ALERT_TXT_USE = ALERT_TXT_KO
     }
+    localStorage.setItem('lang',LANG_TYPE);
     // COLOR_CODE = MainModule.getColorLocalStorage();
     // setColorStyle();
     getModuleData();
-    getMyFavoriteList()
     eventBind();
   }
 
@@ -50,6 +50,34 @@ var LikeListModule = (function(){
       style_code += '.btn-submit{background-color:'+COLOR_CODE[1]+'; color:'+COLOR_CODE[2]+';}'
       localStorage.setItem('color_code',JSON.stringify(COLOR_CODE));
       $('body').prepend('<style>'+style_code+'</style>');
+      getMyFavoriteList()
+    }).fail(function (response){
+        if(response.status === 401){ // 로그인 안되어 있는 상태
+          var MEMBER_ID = MainModule.getSomeUrl('m_id')
+          var USER_ID = MainModule.getSomeUrl('user_id')
+          var USER_EMAIL = MainModule.getSomeUrl('email')
+          var dataObj = {
+            "member_id":MEMBER_ID,
+            "user_id":USER_ID,
+            "email":USER_EMAIL
+          }
+          var settings = {
+            "async": true,
+            "url": "/api/v1/sam/is_logged_for_sam",
+            "method": "GET",
+            "data": dataObj,
+            "headers": {
+                "accept": "application/json"
+            }
+          }
+          $.ajax(settings).done(function (response) {
+            console.log(response)
+            
+            getModuleData()
+          }).fail(function(response){
+            alert('ERROR :: ',response.status);
+          });
+        }
     });
   }
 

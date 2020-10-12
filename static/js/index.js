@@ -66,7 +66,11 @@ var IndexModule = (function(){
 
     $.ajax(settings).done(function (response) {
       setLangLocalStorage()
-      location.href = './ab.html?id='+MODULE_ID+'&m_id='+MEMBER_ID
+      if(SORT_TYPE == 2){
+        location.href = './speaker_list.html?id='+MODULE_ID+'&m_id='+MEMBER_ID
+      }else{
+        location.href = './ab.html?id='+MODULE_ID+'&m_id='+MEMBER_ID
+      }
       // if (SORT_TYPE==0) {
       //   location.href = './ab.html?id='+MODULE_ID+'&m_id='+MEMBER_ID
       // }else{
