@@ -283,7 +283,7 @@ p.ab_info{margin: 6px 0 0 0; font-size: 12.5px;line-height: 18px;}
 }
 /* category별로 볼 때 상세 리스트 페이지 */
 .animation_wrap{width: 100vw; transition:all 0.3s;-webkit-transition:all 0.3s;margin-left: 100vw;}
-.animation_wrap.right{}
+/* .animation_wrap.right{} */
 .animation_wrap.left{margin-left: 0;}
 .cat_contents .session_m_title{width: 100%; margin-left: 0;}
 .cat_contents .session_m_title .session_title{padding-left: 20px;}
