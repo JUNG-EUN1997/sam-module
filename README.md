@@ -11,3 +11,4 @@ SAM module
 2020-10-23
 -------------
 1. session_name_en 과 room_en 정보 구분 추가
+2. ab_detail에 speaker name과 speaker_institute_en 간 줄바꿈 추가
