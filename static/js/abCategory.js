@@ -77,10 +77,14 @@ var AbCategoryModule = (function(){
           $.each(l_val.child_sams,function(m_key,m_val){
             console.log(m_val);
             var is_speaker_institute = (m_val.speaker_institute=="") ? '' : '/'+m_val.speaker_institute
+            var lang_session_name = m_val.session_name
             var lang_speaker_name = m_val.speaker_name
+            var m_room = (m_val.room=='') ? '' : ' / '+m_val.room
             if (LANG_TYPE == 'en') {
               lang_speaker_name = m_val.speaker_name_en
+              lang_session_name = (m_val.session_name_en=="") ? '' : m_val.session_name_en
               is_speaker_institute = (m_val.speaker_institute_en=="") ? '' : '/'+m_val.speaker_institute_en
+              m_room = (m_val.room_en=='') ? '' : ' / '+m_val.room_en
             }
 
             //시간영역
@@ -99,14 +103,14 @@ var AbCategoryModule = (function(){
             }else{
               is_time = ''
             }
-            var m_room = (m_val.room=='') ? '' : ' / '+m_val.room
+            
             //시간영역 종료
             //세션톡 on/off 영역
             var is_session_talk_m = (m_val.session_talk==1) ? '' : '<div class="sesstion_btn"><a href="./question.html?id='+MODULE_ID+'&s_id='+m_val.id+'&m_id='+MEMBER_ID+'"><span></span></a></div>'
             //html파일에 넣는 영역
             list_html += '<div class="session_m_title">'
               list_html += '<div class="session_title">'
-                list_html += '<span>'+m_val.session_name+'</span>'
+                list_html += '<span>'+lang_session_name+'</span>'
                 list_html += '<span>'+lang_speaker_name+is_speaker_institute+'</span>'
                 list_html += '<span>'+m_date+is_time+m_room+'</span>'
               list_html += '</div>'

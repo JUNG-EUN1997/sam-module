@@ -99,8 +99,10 @@ var LikeListModule = (function(){
       var week_name = ALERT_TXT_USE[3];
       for (var i = 0; i < response.length; i++) {
         var use_response_val = [response[i].topic,response[i].speaker_name,response[i].speaker_institute,response[i].authors]
+        var lang_room = response[i].room
         if (LANG_TYPE == 'en') {//영어
           use_response_val = [response[i].topic_en,response[i].speaker_name_en,response[i].speaker_institute_en,response[i].authors_en]
+          lang_room = response[i].room_en
         }
         listHtml += '<div class="ab_cnt"><table class="ab_table"><tr><td>'
         listHtml += '<div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
@@ -127,7 +129,7 @@ var LikeListModule = (function(){
         var s_day = response[i].date.split('-')[2];
         s_day = (s_day.substr(0,1)==0) ? s_day.substr(1,2) : s_day;
         var s_date = s_month+'/'+s_day+'('+week_name[new Date(response[i].date).getDay()]+'), '
-        listHtml += is_br+' <span class="ab_time">'+s_date+response[i].time_start+' ~ '+response[i].time_end+'</span> / '+response[i].room+'</p></td></a>'
+        listHtml += is_br+' <span class="ab_time">'+s_date+response[i].time_start+' ~ '+response[i].time_end+'</span> / '+lang_room+'</p></td></a>'
 
         // listHtml += is_room+' <span class="ab_time">('+response[i].time_start+' ~ '+response[i].time_end+' )</span></p></td></a>'
         listHtml += '</td><td></td></tr></table></div>'

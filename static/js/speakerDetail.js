@@ -87,8 +87,10 @@ var SpeakerDetailModule = (function(){
       var week_name = ALERT_TXT_USE[1];
       for (var i = 0; i < response.length; i++) {
         var use_response_val = [response[i].topic,response[i].speaker_name,response[i].speaker_institute,response[i].authors]
+        var lang_room = response[i].room
         if (LANG_TYPE=='en') {
           use_response_val = [response[i].topic_en,response[i].speaker_name_en,response[i].speaker_institute_en,response[i].authors_en]
+          lang_room = response[i].room_en
         }
         var is_pdf = (response[i].pdf_link!='') ? '<div class="ic-file"></div>' : ''
         samHtml += '<div class="ab_cnt"><a href="./ab_detail.html?id='+response[i].id+'">'+is_pdf;
@@ -117,7 +119,7 @@ var SpeakerDetailModule = (function(){
           is_time = ''
         }
 
-        samHtml += '<span>'+s_date+response[i].time_start+' ~ '+response[i].time_end+'</span> / '+response[i].room+'</span></p></a></div>'
+        samHtml += '<span>'+s_date+response[i].time_start+' ~ '+response[i].time_end+'</span> / '+lang_room+'</span></p></a></div>'
       }
       document.querySelector('.speaker_ab_wrap').innerHTML = samHtml
     });

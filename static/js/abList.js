@@ -233,12 +233,18 @@ var AbListModule = (function(){
             //대메뉴
             var is_session_talk = (value.session_talk==1 || SORT_TYPE==1 ) ? '' : '<div class="sesstion_btn"><a href="./question.html?id='+MODULE_ID+'&s_id='+value.id+'&m_id='+MEMBER_ID+'"><span></span></a></div>'
             ab_list_html += '<div class="session_cnt_wrap"><div class="session_l_title'+is_l_show+'"><div class="session_title">'
-            ab_list_html += '<span>'+value.session_name+'</span>' // session_name
+            var lang_room = value.room
+            if (LANG_TYPE == 'en') {
+              ab_list_html += '<span>'+value.session_name_en+'</span>' // session_name_en
+              lang_room = value.room_en
+            }else{
+              ab_list_html += '<span>'+value.session_name+'</span>' // session_name
+            }
             var l_month = value.date.split('-')[1];
             l_month = (l_month.substr(0,1)==0) ? l_month.substr(1,2) : l_month
             var l_day = value.date.split('-')[2];
             l_day = (l_day.substr(0,1)==0) ? l_day.substr(1,2) : l_day;
-            var l_room = (value.room=='') ? '' : ' / '+value.room
+            var l_room = (lang_room=='') ? '' : ' / '+lang_room
             ab_list_html += '<span>'+l_month+'/'+l_day+'('+week_name[new Date(value.date).getDay()]+'), '+value.time_start+' ~ '+value.time_end+l_room+'</span>'//날짜 및 장소
             var is_right_arrow = (SORT_TYPE==1) ? ' right_arrow' : ''
             var arrow_html = (value.child_sams.length>0) ? '<div class="session_arrow'+is_right_arrow+'"></div>' : '';
@@ -248,12 +254,16 @@ var AbListModule = (function(){
               //소메뉴
                 var is_session_talk_m = (ch_val.session_talk==1) ? '' : '<div class="sesstion_btn"><a href="./question.html?id='+MODULE_ID+'&s_id='+ch_val.id+'&m_id='+MEMBER_ID+'"><span></span></a></div>'
                 ab_list_html += '<div class="session_m_title'+is_m_show+'"><div class="session_title">'
-                ab_list_html += '<span>'+ch_val.session_name+'</span>'
                 var is_speaker_institute = (ch_val.speaker_institute=="") ? '' : '/'+ch_val.speaker_institute
                 var lang_speaker_name = ch_val.speaker_name
+                var m_lang_room = ch_val.room
                 if (LANG_TYPE == 'en') {
                   lang_speaker_name = ch_val.speaker_name_en
                   is_speaker_institute = (ch_val.speaker_institute_en=="") ? '' : '/'+ch_val.speaker_institute_en
+                  ab_list_html += '<span>'+ch_val.session_name_en+'</span>'
+                  m_lang_room = ch_val.room_en
+                }else{
+                  ab_list_html += '<span>'+ch_val.session_name+'</span>'
                 }
                 ab_list_html += '<span>'+lang_speaker_name+is_speaker_institute+'</span>'
                 var m_month = ch_val.date.split('-')[1];
@@ -271,7 +281,7 @@ var AbListModule = (function(){
                 }else{
                   is_time = ''
                 }
-                var m_room = (ch_val.room=='') ? '' : ' / '+ch_val.room
+                var m_room = (m_lang_room=='') ? '' : ' / '+m_lang_room
                 ab_list_html += '<span>'+m_date+is_time+m_room+'</span>'
                 var arrow_html = (ch_val.child_sams.length>0) ? '<div class="session_arrow"></div>' : '';
                 ab_list_html += '</div>'+is_session_talk_m+arrow_html+'</div>'
@@ -287,12 +297,14 @@ var AbListModule = (function(){
                 var lang_speaker_title = con_val.speaker_title
                 var lang_speaker_institute = con_val.speaker_institute
                 var lang_authors = con_val.authors
+                var lang_con_room = con_val.room
                 if (LANG_TYPE == 'en') {
                   lang_topic = con_val.topic_en
                   lang_speaker_name_conval = con_val.speaker_name_en
                   lang_speaker_title = con_val.speaker_title_en
                   lang_speaker_institute = con_val.speaker_institute_en
                   lang_authors = con_val.authors_en
+                  lang_con_room = con_val.room_en
                 }
                 var is_favorite = (con_val.is_favorite == "1") ? ' active' : '';
                 ab_list_html += '<td class="ab_title"><a href="javascript:AbListModule.scrollPush(\'ab_detail.html?id='+con_val.id+'\')"><h1 class="ab_title-h1">'+lang_topic+'</h1></a></td></tr>'
@@ -308,7 +320,7 @@ var AbListModule = (function(){
                 var s_day = con_val.date.split('-')[2];
                 s_day = (s_day.substr(0,1)==0) ? s_day.substr(1,2) : s_day;
                 var s_date = s_month+'/'+s_day+'('+week_name[new Date(con_val.date).getDay()]+'), '
-                ab_list_html += is_br+' <span class="ab_time">'+s_date+con_val.time_start+' ~ '+con_val.time_end+'</span> / '+con_val.room+'</p></a></td>'
+                ab_list_html += is_br+' <span class="ab_time">'+s_date+con_val.time_start+' ~ '+con_val.time_end+'</span> / '+lang_con_room+'</p></a></td>'
                 ab_list_html += '</tr></table></div>'
               })
               ab_list_html += '</div></div>'

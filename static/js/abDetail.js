@@ -45,10 +45,12 @@ var AbDetailModule = (function(){
     $.ajax(settings).done(function (response) {
       var week_name = ['일','월','화','수','목','금','토'];
       var use_response_val = [response.topic,response.speaker_name,response.speaker_institute,response.authors,response.abstract_detail,response.speaker_title]
+      var lang_room = response.room
       if (LANG_TYPE=='en') {
         use_response_val = [response.topic_en,response.speaker_name_en,response.speaker_institute_en,response.authors_en,response.abstract_detail_en,response.speaker_title_en]
         week_name = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         document.querySelector('#abstractHref').innerHTML = '<button class="btn-submit mt-10">Show abstract</button>'
+        lang_room = response.room_en
       }
       //날짜영역
       var s_month = response.date.split('-')[1];
@@ -71,8 +73,8 @@ var AbDetailModule = (function(){
       var is_authors = (use_response_val[3]=="") ? '' : '<br>('+use_response_val[3]+')'
       var is_br = (is_authors=="") ? '<br>' : '<br>';
       detail_html += is_authors
-      var is_room = (is_authors=="" && response.room=="") ? '' : (response.room=="") ? '<br>' : '<br>'+response.room
-      detail_html += is_br+'<span class="ab_time">'+s_date+response.time_start+' ~ '+response.time_end+'</span> / '+response.room+'</p></td>'
+      var is_room = (is_authors=="" && lang_room=="") ? '' : (lang_room=="") ? '<br>' : '<br>'+lang_room
+      detail_html += is_br+'<span class="ab_time">'+s_date+response.time_start+' ~ '+response.time_end+'</span>'+lang_room+'</p></td>'
       detail_html += '<td></td></tr></table>'
       detail_html += '<hr class="hr-division">'
       detail_html += '<div class="detail_content_wrap">'+use_response_val[4].replace(/(?:\r\n|\r|\n)/g, '<br>');+'</div>'
