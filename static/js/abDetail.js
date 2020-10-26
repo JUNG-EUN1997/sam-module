@@ -68,7 +68,7 @@ var AbDetailModule = (function(){
       detail_html += '<img src="'+this_img+'" alt="">'
       detail_html += '</div></div></div></td>'
       detail_html += '<td class="ab_info_wrap">'
-      detail_html += '<h2 class="ab_name-h2">'+use_response_val[1]+'<br>'+use_response_val[5]+'</h2>'
+      detail_html += '<h2 class="ab_name-h2">'+use_response_val[1]+'<br><span class="ab_subname">'+use_response_val[5]+'</span></h2>'
       detail_html += '<p class="ab_info">'+use_response_val[2]+''
       var is_authors = (use_response_val[3]=="") ? '' : '<br>('+use_response_val[3]+')'
       var is_br = (is_authors=="") ? '<br>' : '<br>';

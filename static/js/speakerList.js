@@ -122,7 +122,7 @@ var SpeakerListModule = (function(){
       document.querySelector('.speaker_cnt_wrap').innerHTML = listHtml;
       var el = document.querySelector('.top-fixed-menu')
       if (el) {
-        var top_fix_h = $('.top-fixed-menu').height() + 20;
+        var top_fix_h = $('.top-fixed-menu').height() + 31;
         document.querySelector('.speaker_wrap').style.paddingTop = top_fix_h +'px'
       }
       $(window).scrollTop(SCROLL_OBJ['speaker_list'])

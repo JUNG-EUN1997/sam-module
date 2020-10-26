@@ -39,7 +39,7 @@ var AbListModule = (function(){
   function eventBind() {
     $root.on('change','input[name="dates"]',selectDate)
     $root.on('click','#searchText',searchText);
-    $root.on('click','.session_title',showAndHideList)
+    $root.on('click','.session_m_title .session_title',locationProgramDetail)
     $root.on('click','.session_arrow',showAndHideList)
     $root.on('click','.btn_like',favoriteToggle)
   }
@@ -159,7 +159,7 @@ var AbListModule = (function(){
             var date_val = year+'-'+month+'-'+day
             var date_html = '';
             var select_dates = getLocalStorage();
-            console.log(select_dates);
+            console.log('select_dates>>',select_dates);
             // var is_checked = true;
             today.setHours(0,0,0,0);
             var check_date = {second : '',date:''};
@@ -195,12 +195,16 @@ var AbListModule = (function(){
             })
             document.querySelector('.date_cnts').innerHTML = date_html;
             select_dates = check_date.date
-            console.log(check_date);
+            console.log(check_date,'select_dates>>',select_dates);
             setTimeout(function(){
+              console.log('select_dates>>',select_dates);
               $('input[value="'+check_date.date+'"]').attr('checked',true);
               $('input[value="'+check_date.date+'"]').next('label').attr('tabindex','0')
               $('input[value="'+check_date.date+'"]').next('label').focus();
             },300)
+            setTimeout(function(){
+              console.log('select_dates!!>>',select_dates);
+            },5000)
             setLocalStorage(select_dates);
             getSamList('',select_dates);
 
@@ -253,7 +257,7 @@ var AbListModule = (function(){
             $.each(value.child_sams,function(ch_key,ch_val){
               //소메뉴
                 var is_session_talk_m = (ch_val.session_talk==1) ? '' : '<div class="sesstion_btn"><a href="./question.html?id='+MODULE_ID+'&s_id='+ch_val.id+'&m_id='+MEMBER_ID+'"><span></span></a></div>'
-                ab_list_html += '<div class="session_m_title'+is_m_show+'"><div class="session_title">'
+                ab_list_html += '<div class="session_m_title'+is_m_show+'" data-id="'+ch_val.id+'"><div class="session_title">'
                 var is_speaker_institute = (ch_val.speaker_institute=="") ? '' : '/'+ch_val.speaker_institute
                 var lang_speaker_name = ch_val.speaker_name
                 var m_lang_room = ch_val.room
@@ -306,10 +310,11 @@ var AbListModule = (function(){
                   lang_authors = con_val.authors_en
                   lang_con_room = con_val.room_en
                 }
+                lang_topic = (lang_topic != '') ? '<br>' + lang_topic : lang_topic
                 var is_favorite = (con_val.is_favorite == "1") ? ' active' : '';
-                ab_list_html += '<td class="ab_title"><a href="javascript:AbListModule.scrollPush(\'ab_detail.html?id='+con_val.id+'\')"><h1 class="ab_title-h1">'+lang_topic+'</h1></a></td></tr>'
+                ab_list_html += '<td class="ab_title"><a href="javascript:AbListModule.scrollPush(\'ab_detail.html?id='+con_val.id+'\')"><h1 class="ab_title-h1">'+lang_speaker_name_conval+'</h1></a></td></tr>'
                 ab_list_html += '<tr><td class="ab_like" data-id="'+con_val.id+'"><span class="btn_like'+is_favorite+'"></span></td><td class="ab_info_wrap"><a href="javascript:AbListModule.scrollPush(\'ab_detail.html?id='+con_val.id+'\')">'
-                ab_list_html += '<h2 class="ab_name-h2">'+lang_speaker_name_conval+' '+lang_speaker_title+'</h2>'
+                ab_list_html += '<h2 class="ab_name-h2">'+lang_speaker_title+'<span class="ab_subname">'+lang_topic+'</span></h2>'
                 ab_list_html += '<p class="ab_info">'+lang_speaker_institute+''
                 var is_authors = (lang_authors=="") ? '' : '<br>('+lang_authors+')'
                 ab_list_html += is_authors
@@ -358,6 +363,12 @@ var AbListModule = (function(){
     }else{
       theTarget.addClass('hide');
     }
+  }
+
+  function locationProgramDetail(){
+    var this_id = $(this).closest('.session_m_title').attr('data-id');
+    console.log('test',this_id)
+    scrollPush('ab_detail.html?id='+this_id);
   }
 
   function favoriteToggle(){
@@ -441,23 +452,37 @@ var AbListModule = (function(){
   }
 
   function setLocalStorage(date){
+    console.log('local date >> ',date)
+    console.log(typeof date == 'object')
     var push_date = (typeof date == 'object') ? JSON.stringify(date_arr) : date;
+    console.log('push_date>> ',push_date)
     localStorage.setItem('date',push_date);
   }
 
   function searchText(){
-    search_text = document.querySelector('#searchInput').value;
-    if (SORT_TYPE==1) {
-      is_first=true;
-    }
+    console.log('search! >> select_dates ',select_dates)
+    // setTimeout(function(){
+      search_text = document.querySelector('#searchInput').value;
+      console.log(search_text,'select_dates>>',select_dates)
+      var date_check_el = document.querySelector('input[name="dates"]:checked')
+      if(select_dates == undefined && date_check_el != null){
+        select_dates = date_check_el.value
+      }
+      // if(search_text == ''){
+        
+      // }
+      if (SORT_TYPE==1) {
+        is_first=true;
+      }
     getSamList(search_text,select_dates)
+    // },1000)
   }
 
   function selectDate(){
     if (this.checked) {
       select_dates = this.value
     }
-    console.log(select_dates);
+    console.log('select_dates>>',select_dates);
     setLocalStorage(select_dates);
     getSamList(search_text,select_dates)
   }

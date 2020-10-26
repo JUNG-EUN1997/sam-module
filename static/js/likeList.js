@@ -109,7 +109,7 @@ var LikeListModule = (function(){
         var this_photo = (response[i].speaker_photo_1!='') ? response[i].speaker_photo_1 : './static/images/img_human.png'
         listHtml += '<img src="'+this_photo+'" alt="">'//프로필사진
         listHtml += '</div></div></div></td>'
-        listHtml += '<td class="ab_title"><a href="./ab_detail.html?id='+response[i].id+'"><h1 class="ab_title-h1">'+use_response_val[0]+'</h1></a></td>'//타이틀
+        listHtml += '<td class="ab_title"><a href="./ab_detail.html?id='+response[i].id+'"><h1 class="ab_title-h1">'+use_response_val[1]+'</h1></a></td>'
         listHtml += '<td></td></tr>'
         var is_push = (response[i].push_type=='1') ? ' active' : ''
         listHtml += '<tr><td class="btn_alarm_wrap'+is_push+'" data-id="'+response[i].sam_favorite_id+'" data-date="'+response[i].date+'" data-start-time="'+response[i].time_start+'" data-end-time="'+response[i].time_end+'">'//액티브여부
@@ -117,7 +117,7 @@ var LikeListModule = (function(){
         listHtml += '<span class="btn_alarm"></span><span class="txt_alarm">'+time_txt+'</span>'//알람시간
         listHtml += '</td>'
         listHtml += '<td class="ab_info_wrap"><a href="./ab_detail.html?id='+response[i].id+'">'
-        listHtml += '<h2 class="ab_name-h2">'+use_response_val[1]+'</h2>'
+        listHtml += '<h2 class="ab_name-h2">'+use_response_val[0]+'</h2>'
         listHtml += '<p class="ab_info">'+use_response_val[2]+''
         var is_authors = (use_response_val[3]=="") ? '' : '<br>('+use_response_val[3]+')'
         listHtml += is_authors

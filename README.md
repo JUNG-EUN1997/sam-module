@@ -12,3 +12,7 @@ SAM module
 -------------
 1. session_name_en 과 room_en 정보 구분 추가
 2. ab_detail에 speaker name과 speaker_institute_en 간 줄바꿈 추가
+
+2020-10-26
+-------------
+1. sam모듈 스타일 및 데이터 노출 위치 수정

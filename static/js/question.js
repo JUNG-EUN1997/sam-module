@@ -6,7 +6,7 @@ var QuestionModule = (function(){
   var LANG_TYPE;
   var MEMBER_ID;
   var ALERT_TXT_KO = ['로그인 후 이용하실 수 있는 서비스입니다.','코드번호를 입력해주세요.','해당 발표자를 찾을 수 없습니다.','해당 모듈을 찾을 수 없습니다.','잘못된 코드입니다.','질문을 입력해주세요.','질문 대상을 선택해주세요.','제출이 완료되었습니다.'];
-  var ALERT_TXT_EN = ['You can use it after logging in.','Please enter the code.','not found the speaker.','not found the module.','wrong code.','Please enter the question.','Please select the target to question.','The question has been submitted.'];
+  var ALERT_TXT_EN = ['You can use it after logging in.','Please enter the code.','not found the speaker.','not found the module.','wrong code.','Please write a question.','Please select the target to question.','The question has been submitted.'];
   var ALERT_TXT_USE = []
   var COLOR_CODE = ['x','메인색상','메인색상내부글자색상','RGB색상'];
   function init(){
