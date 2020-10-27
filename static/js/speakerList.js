@@ -15,7 +15,7 @@ var SpeakerListModule = (function(){
     MEMBER_ID = MainModule.getSomeUrl('m_id')
     SCROLL_OBJ = localStorage.getItem('scroll_value')
     SCROLL_OBJ = (SCROLL_OBJ==null) ? {list_0:0,list_1:0,list_1_detail:0,speaker_list:0} : JSON.parse(SCROLL_OBJ);
-
+    sort_type = LANG_TYPE
     getModuleData()
     eventBind();
   }
@@ -102,6 +102,7 @@ var SpeakerListModule = (function(){
     $.ajax(settings).done(function (server_response) {
       var listHtml = ''
       var response = sortResponse(server_response,sort_type)
+      console.log(response)
       for (var i = 0; i < response.length; i++) {
         var is_order_bg = (response[i].order !='0') ? ' bg-order' : ''
         var use_response_val = [response[i].speaker_name,response[i].speaker_institute];
