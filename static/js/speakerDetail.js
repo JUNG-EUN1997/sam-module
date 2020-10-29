@@ -2,6 +2,7 @@ var SpeakerDetailModule = (function(){
   var $root
   var SPEAKER_NAME
   var SPEAKER_INSTITUTE;
+  var SPEAKER_TITLE;
   var LANG_TYPE;
   var MODULE_ID;
   var ALERT_TXT_KO = ['로그인 후 사용 가능합니다.',['일','월','화','수','목','금','토']]
@@ -13,6 +14,7 @@ var SpeakerDetailModule = (function(){
     MODULE_ID = MainModule.getSomeUrl('id')
     SPEAKER_NAME = unescape(MainModule.getSomeUrl('name'))
     SPEAKER_INSTITUTE = unescape(MainModule.getSomeUrl('institute'))
+    SPEAKER_TITLE = unescape(MainModule.getSomeUrl('title'))
     LANG_TYPE = MainModule.getLocalStorage()
     COLOR_CODE = MainModule.getColorLocalStorage();
     if (LANG_TYPE == 'en') {//영어
@@ -45,9 +47,10 @@ var SpeakerDetailModule = (function(){
       }
     }
     $.ajax(settings).done(function (response) {
+      console.log(response)
       var listHtml = ''
       for (var i = 0; i < response.length; i++) {
-        if (response[i].speaker_name == SPEAKER_NAME && response[i].speaker_institute == SPEAKER_INSTITUTE) {
+        if (response[i].speaker_name == SPEAKER_NAME && response[i].speaker_title == SPEAKER_TITLE) {
           var use_response_val = [response[i].speaker_name,response[i].speaker_institute];
           if (LANG_TYPE=='en') {
             use_response_val = [response[i].speaker_name_en,response[i].speaker_institute_en];
@@ -60,6 +63,7 @@ var SpeakerDetailModule = (function(){
           listHtml += '<h1 class="ab_title-h1">'+use_response_val[0]+'</h1>'
           listHtml += '<p class="ab_info">'+use_response_val[1]+'</p>'
           listHtml += '</td><td></td></tr></tbody></table>'
+          console.log('show list html>>',listHtml)
           document.querySelector('.ab_cnt').innerHTML = listHtml;
           break;
         }
@@ -70,7 +74,7 @@ var SpeakerDetailModule = (function(){
   function getThisSpeakerSam(){
     var dataObj = {
       "speaker_name":SPEAKER_NAME,
-      "speaker_institute":SPEAKER_INSTITUTE,
+      "speaker_title":SPEAKER_TITLE,
       "module_id":MODULE_ID
     }
     var settings = {

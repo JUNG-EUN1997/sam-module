@@ -20,3 +20,9 @@ SAM module
 2020-10-27
 -------------
 1. speaker list 정렬 기본으로 글자순 정렬되도록 기능 추가
+
+2020-10-29
+-------------
+1. 소속(speaker_title, speaker_title_en),이름(speaker_name, speaker_name_en) 이 동일하면 한 사람으로 노출되도록 수정
+2. speaker list 에서 location시 title 가져가도록 추가
+3. speaker detail에서 title 전송 및 소스수정

@@ -105,12 +105,12 @@ var SpeakerListModule = (function(){
       console.log(response)
       for (var i = 0; i < response.length; i++) {
         var is_order_bg = (response[i].order !='0') ? ' bg-order' : ''
-        var use_response_val = [response[i].speaker_name,response[i].speaker_institute];
+        var use_response_val = [response[i].speaker_name,response[i].speaker_institute,response[i].speaker_title];
         if (LANG_TYPE=='en') {
-          use_response_val = [response[i].speaker_name_en,response[i].speaker_institute_en];
+          use_response_val = [response[i].speaker_name_en,response[i].speaker_institute_en,response[i].speaker_title_en];
         }
         var is_count = (Number(response[i].sam_count)>1) ? '<span class="circle-cnt_num">'+response[i].sam_count+'</span>' : ''
-        listHtml += '<div class="ab_cnt'+is_order_bg+'"><table class="ab_table"><tr><td>'
+        listHtml += '<div class="ab_cnt'+is_order_bg+'" data-speaker_title="'+response[i].speaker_title+'"><table class="ab_table"><tr><td>'
         listHtml += '<div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
         var this_img = (response[i].speaker_photo_1!="") ? response[i].speaker_photo_1 : './static/images/img_human.png'
         listHtml += '<img src="'+this_img+'" alt="">'
@@ -133,6 +133,7 @@ var SpeakerListModule = (function(){
   function getThisSpeakerSam(){
     var name = $(this).find('.ab_title-h1').attr('data-value');
     var institute = $(this).find('.ab_info').attr('data-value');
+    var speaker_title = $(this).attr('data-speaker_title');
     var this_cnt = this.querySelector('.circle-cnt_num')
     var dataObj = {
       "speaker_name":name,
@@ -155,7 +156,7 @@ var SpeakerListModule = (function(){
         location.href = 'ab_detail.html?id='+response[0].id;
       }else{
         // 초록 리스트 페이지로 이동
-        location.href = 'speaker_detail.html?id='+MODULE_ID+'&name='+escape(name)+'&institute='+escape(institute)
+        location.href = 'speaker_detail.html?id='+MODULE_ID+'&name='+escape(name)+'&institute='+escape(institute)+'&title='+escape(speaker_title)
       }
     });
   }
