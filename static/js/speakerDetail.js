@@ -47,7 +47,6 @@ var SpeakerDetailModule = (function(){
       }
     }
     $.ajax(settings).done(function (response) {
-      console.log(response)
       var listHtml = ''
       for (var i = 0; i < response.length; i++) {
         if (response[i].speaker_name == SPEAKER_NAME && response[i].speaker_title == SPEAKER_TITLE) {
@@ -63,7 +62,6 @@ var SpeakerDetailModule = (function(){
           listHtml += '<h1 class="ab_title-h1">'+use_response_val[0]+'</h1>'
           listHtml += '<p class="ab_info">'+use_response_val[1]+'</p>'
           listHtml += '</td><td></td></tr></tbody></table>'
-          console.log('show list html>>',listHtml)
           document.querySelector('.ab_cnt').innerHTML = listHtml;
           break;
         }

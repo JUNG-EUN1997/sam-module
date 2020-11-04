@@ -102,7 +102,6 @@ var SpeakerListModule = (function(){
     $.ajax(settings).done(function (server_response) {
       var listHtml = ''
       var response = sortResponse(server_response,sort_type)
-      console.log(response)
       for (var i = 0; i < response.length; i++) {
         var is_order_bg = (response[i].order !='0') ? ' bg-order' : ''
         var use_response_val = [response[i].speaker_name,response[i].speaker_institute,response[i].speaker_title];
@@ -110,7 +109,7 @@ var SpeakerListModule = (function(){
           use_response_val = [response[i].speaker_name_en,response[i].speaker_institute_en,response[i].speaker_title_en];
         }
         var is_count = (Number(response[i].sam_count)>1) ? '<span class="circle-cnt_num">'+response[i].sam_count+'</span>' : ''
-        listHtml += '<div class="ab_cnt'+is_order_bg+'" data-speaker_title="'+response[i].speaker_title+'"><table class="ab_table"><tr><td>'
+        listHtml += '<div class="ab_cnt'+is_order_bg+'" data-speaker_title="'+response[i].speaker_title+'" data-id="'+response[i].id+'"><table class="ab_table"><tr><td>'
         listHtml += '<div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
         var this_img = (response[i].speaker_photo_1!="") ? response[i].speaker_photo_1 : './static/images/img_human.png'
         listHtml += '<img src="'+this_img+'" alt="">'
@@ -135,6 +134,8 @@ var SpeakerListModule = (function(){
     var institute = $(this).find('.ab_info').attr('data-value');
     var speaker_title = $(this).attr('data-speaker_title');
     var this_cnt = this.querySelector('.circle-cnt_num')
+    var this_id = this.getAttribute('data-id');
+    console.log(this_cnt)
     var dataObj = {
       "speaker_name":name,
       "speaker_institute":institute,
@@ -150,10 +151,11 @@ var SpeakerListModule = (function(){
       }
     }
     $.ajax(settings).done(function (response) {
+      console.log(response)
       SCROLL_OBJ['speaker_list'] = window.scrollY
       localStorage.setItem('scroll_value',JSON.stringify(SCROLL_OBJ))
       if (this_cnt==null) {
-        location.href = 'ab_detail.html?id='+response[0].id;
+        location.href = 'ab_detail.html?id='+this_id;
       }else{
         // 초록 리스트 페이지로 이동
         location.href = 'speaker_detail.html?id='+MODULE_ID+'&name='+escape(name)+'&institute='+escape(institute)+'&title='+escape(speaker_title)

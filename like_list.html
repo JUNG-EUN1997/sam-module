@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/css/common.css">
-    <link rel="stylesheet" href="./static/css/main.css?v=201026">
-    <title></title>
-  </head>
-  <body class="body-bg">
-    <div class="wrap" style="position:relative">
-      <div class="wrap_w">
 
-        <!-- <div class="ab_cnt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./static/css/common.css">
+  <link rel="stylesheet" href="./static/css/main.css?v=201026">
+  <title></title>
+</head>
+
+<body class="body-bg">
+  <div class="wrap" style="position:relative">
+    <div class="wrap_w">
+      <div class="">
+        <div class="tab_wrap js-tab_wrap">
+          <a href="javascript:LikeListModule.changeSortType('0',this)" class="active"><span>Session</span>
+          </a>
+          <a href="javascript:LikeListModule.changeSortType('1',this)"><span>Speakers</span>
+          </a>
+          <div></div>
+        </div>
+      </div>
+      <div class="js-favorite_wrap">
+
+      </div>
+      <!-- <div class="ab_cnt">
           <table class="ab_table">
             <tr>
               <td>
@@ -43,39 +56,40 @@
             </tr>
           </table>
         </div> -->
-      </div>
-      <div class="pop_bg"></div>
-      <div class="pop_wrap not_vc">
-        <div class="pop_content alarm_pop_wrap">
-          <div class="pop_btn-x">
-            <span></span>
+    </div>
+    <div class="pop_bg"></div>
+    <div class="pop_wrap not_vc">
+      <div class="pop_content alarm_pop_wrap">
+        <div class="pop_btn-x">
+          <span></span>
+        </div>
+        <h1 class="h1-pop_title">Alarm setting</h1>
+        <div class="select_wrap pop_select_wrap">
+          <div class="select_trigger">
+            <span class="select_placeholder">SELECT</span>
+            <div class="ic_select"></div>
           </div>
-          <h1 class="h1-pop_title">Alarm setting</h1>
-          <div class="select_wrap pop_select_wrap">
-            <div class="select_trigger">
-              <span class="select_placeholder">SELECT</span>
-              <div class="ic_select"></div>
-            </div>
-            <div class="option_wrap">
-              <span class="option_cnt" data-value="-1">OFF</span>
-              <span class="option_cnt" data-value="5">5 mins</span>
-              <!-- <span class="option_cnt" data-value="15">15 mins</span>
+          <div class="option_wrap">
+            <span class="option_cnt" data-value="-1">OFF</span>
+            <span class="option_cnt" data-value="5">5 mins</span>
+            <!-- <span class="option_cnt" data-value="15">15 mins</span>
               <span class="option_cnt" data-value="30">30 mins</span> -->
-            </div>
           </div>
-          <button id="submitAlarm" class="btn-submit">Done</button>
         </div>
-        <div class="pop_content alert_pop_wrap">
-          <div class="pop_btn-x">
-            <span></span>
-          </div>
-          <h1 class="h1-pop_title" id="alertTxt"></h1>
-          <button class="btn-submit btn-pop_submit" onclick="MainModule.hidePop()">Done</button>
+        <button id="submitAlarm" class="btn-submit">Done</button>
+      </div>
+      <div class="pop_content alert_pop_wrap">
+        <div class="pop_btn-x">
+          <span></span>
         </div>
+        <h1 class="h1-pop_title" id="alertTxt"></h1>
+        <button class="btn-submit btn-pop_submit" onclick="MainModule.hidePop()">Done</button>
       </div>
     </div>
-    <script src="./static/lib/jquery-1.12.4.min.js"></script>
-    <script src="./static/js/main.js?v=1"></script>
-    <script src="./static/js/likeList.js?v=201026"></script>
-  </body>
+  </div>
+  <script src="./static/lib/jquery-1.12.4.min.js"></script>
+  <script src="./static/js/main.js?v=1"></script>
+  <script src="./static/js/likeList.js?v=201104_2"></script>
+</body>
+
 </html>

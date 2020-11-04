@@ -26,3 +26,12 @@ SAM module
 1. 소속(speaker_title, speaker_title_en),이름(speaker_name, speaker_name_en) 이 동일하면 한 사람으로 노출되도록 수정
 2. speaker list 에서 location시 title 가져가도록 추가
 3. speaker detail에서 title 전송 및 소스수정
+
+2020-10-30
+-------------
+1. confirm, alert 등 브라우저 팝업 안뜨는 문제 custom 팝업으로 수정
+2. speaker list 에서 ajax return 값이 없어도 이동되도록 수정
+
+2020-11-04
+-------------
+1. like_list 사진유무로 speaker, session 타입나눔 

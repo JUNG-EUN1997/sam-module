@@ -8,6 +8,7 @@ var LikeListModule = (function(){
   var ALERT_TXT_KO = ['이미 시작되었거나 종료된 Session 입니다.','시간을 선택해주세요.','해당 게시글을 찾을 수 없습니다.',['일','월','화','수','목','금','토']];
   var ALERT_TXT_USE = [];
   var COLOR_CODE = ['x','메인색상','메인색상내부글자색상','RGB색상'];
+  var favorite_type = 0; // 0:session, 1:favorite
   function init(){
     $root = $('.wrap');
     LANG_TYPE = MainModule.getSomeUrl('lang')
@@ -46,6 +47,10 @@ var LikeListModule = (function(){
       COLOR_CODE[1] = theTarget.color_2;
       COLOR_CODE[2] = theTarget.color_3;
       var style_code = '.ab_title-h1{color:'+COLOR_CODE[1]+';}'
+      style_code += '.tab_wrap a.active, .tab_wrap a:hover{background-color:'+COLOR_CODE[1]+';color:'+COLOR_CODE[2]+'}'
+      style_code += '.tab_wrap a.active>span,.tab_wrap a:hover>span{background-color:'+COLOR_CODE[1]+';color:'+COLOR_CODE[2]+';}'
+      style_code += '.tab_wrap a.active>span:before, .tab_wrap a.active>span:after, .tab_wrap a:hover>span:before, .tab_wrap a:hover>span:after{background-color:'+COLOR_CODE[1]+';}';
+      style_code += '.tab_wrap{border-color:'+COLOR_CODE[1]+'!important;}'
       style_code += '.ic_select{border-top-color:'+COLOR_CODE[1]+';}'
       style_code += '.btn-submit{background-color:'+COLOR_CODE[1]+'; color:'+COLOR_CODE[2]+';}'
       localStorage.setItem('color_code',JSON.stringify(COLOR_CODE));
@@ -98,43 +103,54 @@ var LikeListModule = (function(){
       var listHtml = '';
       var week_name = ALERT_TXT_USE[3];
       for (var i = 0; i < response.length; i++) {
+        console.log(favorite_type,response.speaker_photo_1)
         var use_response_val = [response[i].topic,response[i].speaker_name,response[i].speaker_institute,response[i].authors]
         var lang_room = response[i].room
         if (LANG_TYPE == 'en') {//영어
           use_response_val = [response[i].topic_en,response[i].speaker_name_en,response[i].speaker_institute_en,response[i].authors_en]
           lang_room = response[i].room_en
         }
-        listHtml += '<div class="ab_cnt"><table class="ab_table"><tr><td>'
-        listHtml += '<div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
-        var this_photo = (response[i].speaker_photo_1!='') ? response[i].speaker_photo_1 : './static/images/img_human.png'
-        listHtml += '<img src="'+this_photo+'" alt="">'//프로필사진
-        listHtml += '</div></div></div></td>'
-        listHtml += '<td class="ab_title"><a href="./ab_detail.html?id='+response[i].id+'"><h1 class="ab_title-h1">'+use_response_val[1]+'</h1></a></td>'
-        listHtml += '<td></td></tr>'
-        var is_push = (response[i].push_type=='1') ? ' active' : ''
-        listHtml += '<tr><td class="btn_alarm_wrap'+is_push+'" data-id="'+response[i].sam_favorite_id+'" data-date="'+response[i].date+'" data-start-time="'+response[i].time_start+'" data-end-time="'+response[i].time_end+'">'//액티브여부
-        var time_txt = (response[i].minutes!=0 && response[i].minutes!=-1) ? response[i].minutes +'min' : ''
-        listHtml += '<span class="btn_alarm"></span><span class="txt_alarm">'+time_txt+'</span>'//알람시간
-        listHtml += '</td>'
-        listHtml += '<td class="ab_info_wrap"><a href="./ab_detail.html?id='+response[i].id+'">'
-        listHtml += '<h2 class="ab_name-h2">'+use_response_val[0]+'</h2>'
-        listHtml += '<p class="ab_info">'+use_response_val[2]+''
-        var is_authors = (use_response_val[3]=="") ? '' : '<br>('+use_response_val[3]+')'
-        listHtml += is_authors
-        // var is_room = (is_authors=="" && response[i].room=="") ? '' : (response[i].room=="") ? '<br>' : '<br>'+response[i].room
+        if(favorite_type == 0 && response[i].speaker_photo_1 != '' || favorite_type == 1 && response[i].speaker_photo_1 == ''){
 
-        var is_br = (is_authors=="") ? '<br>' : '<br>';
-        var s_month = response[i].date.split('-')[1];
-        s_month = (s_month.substr(0,1)==0) ? s_month.substr(1,2) : s_month
-        var s_day = response[i].date.split('-')[2];
-        s_day = (s_day.substr(0,1)==0) ? s_day.substr(1,2) : s_day;
-        var s_date = s_month+'/'+s_day+'('+week_name[new Date(response[i].date).getDay()]+'), '
-        listHtml += is_br+' <span class="ab_time">'+s_date+response[i].time_start+' ~ '+response[i].time_end+'</span> / '+lang_room+'</p></td></a>'
+        }else{
+          if(favorite_type == 0){
+            use_response_val[1] = response[i].session_name
+            if (LANG_TYPE == 'en') {//영어
+              use_response_val[1] = response[i].session_name_en
+            }
+          }
+          listHtml += '<div class="ab_cnt"><table class="ab_table"><tr><td>'
+          listHtml += '<div class="img-ratio_wrap"><div class="img-ratio_h"><div class="img-ratio_cen">'
+          var this_photo = (response[i].speaker_photo_1!='') ? response[i].speaker_photo_1 : './static/images/img_human.png'
+          listHtml += '<img src="'+this_photo+'" alt="">'//프로필사진
+          listHtml += '</div></div></div></td>'
+          listHtml += '<td class="ab_title"><a href="./ab_detail.html?id='+response[i].id+'"><h1 class="ab_title-h1">'+use_response_val[1]+'</h1></a></td>'
+          listHtml += '<td></td></tr>'
+          var is_push = (response[i].push_type=='1') ? ' active' : ''
+          listHtml += '<tr><td class="btn_alarm_wrap'+is_push+'" data-id="'+response[i].sam_favorite_id+'" data-date="'+response[i].date+'" data-start-time="'+response[i].time_start+'" data-end-time="'+response[i].time_end+'">'//액티브여부
+          var time_txt = (response[i].minutes!=0 && response[i].minutes!=-1) ? response[i].minutes +'min' : ''
+          listHtml += '<span class="btn_alarm"></span><span class="txt_alarm">'+time_txt+'</span>'//알람시간
+          listHtml += '</td>'
+          listHtml += '<td class="ab_info_wrap"><a href="./ab_detail.html?id='+response[i].id+'">'
+          listHtml += '<h2 class="ab_name-h2">'+use_response_val[0]+'</h2>'
+          listHtml += '<p class="ab_info">'+use_response_val[2]+''
+          var is_authors = (use_response_val[3]=="") ? '' : '<br>('+use_response_val[3]+')'
+          listHtml += is_authors
+          // var is_room = (is_authors=="" && response[i].room=="") ? '' : (response[i].room=="") ? '<br>' : '<br>'+response[i].room
 
-        // listHtml += is_room+' <span class="ab_time">('+response[i].time_start+' ~ '+response[i].time_end+' )</span></p></td></a>'
-        listHtml += '</td><td></td></tr></table></div>'
+          var is_br = (is_authors=="") ? '<br>' : '<br>';
+          var s_month = response[i].date.split('-')[1];
+          s_month = (s_month.substr(0,1)==0) ? s_month.substr(1,2) : s_month
+          var s_day = response[i].date.split('-')[2];
+          s_day = (s_day.substr(0,1)==0) ? s_day.substr(1,2) : s_day;
+          var s_date = s_month+'/'+s_day+'('+week_name[new Date(response[i].date).getDay()]+'), '
+          listHtml += is_br+' <span class="ab_time">'+s_date+response[i].time_start+' ~ '+response[i].time_end+'</span> / '+lang_room+'</p></td></a>'
+
+          // listHtml += is_room+' <span class="ab_time">('+response[i].time_start+' ~ '+response[i].time_end+' )</span></p></td></a>'
+          listHtml += '</td><td></td></tr></table></div>'
+        }
       }
-      document.querySelector('.wrap_w').innerHTML = listHtml;
+      document.querySelector('.js-favorite_wrap').innerHTML = listHtml;
     }).fail(function(response){
 
     });
@@ -202,8 +218,21 @@ var LikeListModule = (function(){
     });;
   }
 
+  function changeSortType(num){
+    favorite_type = Number(num)
+    console.log(num)
+    var tab_el = document.querySelectorAll('.js-tab_wrap a')
+    for(var i = 0; i<tab_el.length;i++){
+      tab_el[i].classList.remove('active');
+    }
+    console.log($('.js-tab_wrap a').eq(favorite_type))
+    $('.js-tab_wrap a').eq(favorite_type).addClass('active');
+    getMyFavoriteList()
+  }
+
   return {
-    init : init
+    init : init,
+    changeSortType : changeSortType
   };
 })();
 (function () {
